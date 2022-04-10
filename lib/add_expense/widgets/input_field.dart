@@ -14,13 +14,13 @@ class InputField extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextField(
       controller: controller,
-      cursorColor: AppColors.standardColor,
+      cursorColor: AppColors.mainColor4,
       decoration: InputDecoration(
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(20.0),
         ),
         focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: AppColors.standardColor, width: 3.w),
+          borderSide: BorderSide(color: AppColors.mainColor4, width: 3.w),
           borderRadius: BorderRadius.circular(20.0),
         ),
         labelText: labelText,

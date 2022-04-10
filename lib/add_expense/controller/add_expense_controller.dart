@@ -1,12 +1,8 @@
-import 'dart:convert';
-import 'dart:io';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:gsheets/gsheets.dart';
 
-import '../../sheets/sheets.dart';
+import '../../models/expense.dart';
+import '../../sheets_api/sheets_api.dart';
 
 class AddExpenseController extends GetxController with StateMixin {
   final String nameLabelText = 'Name*';
@@ -44,7 +40,7 @@ class AddExpenseController extends GetxController with StateMixin {
   void onInit() {
     selectedMeasureUnit.value = measureUnits[0];
     selectedExpenseCategory.value = expenseCategories[0];
-    readJson();
+    change(null, status: RxStatus.success());
     super.onInit();
   }
 
@@ -60,8 +56,18 @@ class AddExpenseController extends GetxController with StateMixin {
     }
   }
 
-  Future<void> readJson() async {
-    var s = Sheets();
-    await s.addRecord();
+  Future<void> addExpense() async {
+    change(null, status: RxStatus.loading());
+    Expense expense = Expense(
+      name: nameTextEditingController.value.text,
+      price: double.parse(priceTextEditingController.value.text),
+      quantity: double.parse(quantityTextEditingController.value.text),
+      unit: selectedMeasureUnit.value,
+      category: selectedExpenseCategory.value,
+      provider: providerTextEditingController.value.text,
+    );
+
+    await SheetsApi().addRecord(expense);
+    change(null, status: RxStatus.success());
   }
 }
