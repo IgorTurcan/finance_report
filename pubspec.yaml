@@ -30,7 +30,7 @@ flutter_icons:
 
 flutter_native_splash:
   image: assets/images/logo.png
-  color: "2BBD5C"
+  color: "F3C892"
   android_disable_fullscreen: true
 
 flutter:
