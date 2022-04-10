@@ -4,6 +4,9 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:gsheets/gsheets.dart';
+
+import '../../sheets/sheets.dart';
 
 class AddExpenseController extends GetxController with StateMixin {
   final String nameLabelText = 'Name*';
@@ -58,8 +61,7 @@ class AddExpenseController extends GetxController with StateMixin {
   }
 
   Future<void> readJson() async {
-    final data = await rootBundle.loadString('assets/secret/secret.json');
-    final jsonResponse = json.decode(data);
-    print('Secret passs ${jsonResponse}');
+    var s = Sheets();
+    await s.addRecord();
   }
 }
