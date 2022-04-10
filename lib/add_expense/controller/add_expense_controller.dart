@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class AddExpenseController extends GetxController with StateMixin {
-  final String nameLabelText = 'Name';
+  final String nameLabelText = 'Name*';
   var nameTextEditingController = TextEditingController().obs;
 
-  final String priceLabelText = 'Price';
+  final String priceLabelText = 'Price*';
   var priceTextEditingController = TextEditingController().obs;
 
-  final String quantityLabelText = 'Quantity';
+  final String quantityLabelText = 'Quantity*';
   var quantityTextEditingController = TextEditingController().obs;
 
-  final String measureUnitLabelText = 'Unit';
+  final String measureUnitLabelText = 'Unit*';
   final measureUnits = const <String>[
     'kg',
     'l',
@@ -19,7 +19,7 @@ class AddExpenseController extends GetxController with StateMixin {
   ];
   var selectedMeasureUnit = ''.obs;
 
-  final String expenseCategoryLabelText = 'Category';
+  final String expenseCategoryLabelText = 'Category*';
   final expenseCategories = const <String>[
     'Debt',
     'Mission',

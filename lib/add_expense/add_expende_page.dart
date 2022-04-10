@@ -26,9 +26,9 @@ class AddExpensePage extends StatelessWidget {
           padding: EdgeInsets.only(left: 100.w, right: 100.w),
           child: Obx(
             () => SingleChildScrollView(
-              child: ListView(
-                shrinkWrap: true,
-                physics: const AlwaysScrollableScrollPhysics(),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
                   InputField(
                     labelText: controller.nameLabelText,
@@ -43,7 +43,7 @@ class AddExpensePage extends StatelessWidget {
                   Row(
                     children: [
                       SizedBox(
-                        width: 0.5.sw,
+                        width: 0.6.sw,
                         child: InputField(
                           labelText: controller.quantityLabelText,
                           controller: controller.quantityTextEditingController.value,
@@ -51,7 +51,7 @@ class AddExpensePage extends StatelessWidget {
                       ),
                       Expanded(child: Container()),
                       SizedBox(
-                        width: 0.3.sw,
+                        width: 0.25.sw,
                         child: SelectField(
                           labelText: controller.measureUnitLabelText,
                           valueList: controller.measureUnits,
@@ -80,12 +80,7 @@ class AddExpensePage extends StatelessWidget {
           ),
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: AppColors.standardColor,
-        onPressed: () {},
-        tooltip: 'Add',
-        child: const Icon(Icons.add),
-      ),
+      floatingActionButton: const AddButton(),
     );
   }
 }
@@ -97,6 +92,20 @@ class KeyboardContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: MediaQuery.of(context).viewInsets.bottom,
+    );
+  }
+}
+
+class AddButton extends StatelessWidget {
+  const AddButton({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return FloatingActionButton(
+      backgroundColor: AppColors.standardColor,
+      onPressed: () {},
+      tooltip: 'Add',
+      child: const Icon(Icons.add),
     );
   }
 }
