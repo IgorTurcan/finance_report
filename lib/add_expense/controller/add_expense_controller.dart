@@ -58,16 +58,24 @@ class AddExpenseController extends GetxController with StateMixin {
 
   Future<void> addExpense() async {
     change(null, status: RxStatus.loading());
-    Expense expense = Expense(
-      name: nameTextEditingController.value.text,
-      price: double.parse(priceTextEditingController.value.text),
-      quantity: double.parse(quantityTextEditingController.value.text),
-      unit: selectedMeasureUnit.value,
-      category: selectedExpenseCategory.value,
-      provider: providerTextEditingController.value.text,
-    );
+    try {
+      Expense expense = Expense(
+        name: nameTextEditingController.value.text,
+        price: double.parse(priceTextEditingController.value.text),
+        quantity: double.parse(quantityTextEditingController.value.text),
+        unit: selectedMeasureUnit.value,
+        category: selectedExpenseCategory.value,
+        provider: providerTextEditingController.value.text,
+      );
 
-    await SheetsApi().addRecord(expense);
+      var response = await SheetsApi().addRecord(expense);
+      response.fold(
+        (l) => Get.snackbar('Failure', l),
+        (r) => Get.snackbar('Success', 'Record added successfully!'),
+      );
+    } catch (e) {
+      Get.snackbar('Failure', e.toString());
+    }
     change(null, status: RxStatus.success());
   }
 }

@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:dartz/dartz.dart';
 import 'package:flutter/services.dart';
 import 'package:gsheets/gsheets.dart';
 
@@ -19,8 +20,13 @@ class SheetsApi {
     ss = sheet.worksheetByTitle('2022');
   }
 
-  Future<void> addRecord(Expense expense) async {
-    await _initSheet();
-    await ss?.values.appendRow(expense.toList());
+  Future<Either<String, void>> addRecord(Expense expense) async {
+    try {
+      await _initSheet();
+      await ss?.values.appendRow(expense.toList());
+      return const Right(null);
+    } catch (e) {
+      return Left(e.toString());
+    }
   }
 }
