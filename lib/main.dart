@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'add_expense/add_expende_page.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
 }
 

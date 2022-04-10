@@ -24,9 +24,9 @@ class AddExpensePage extends StatelessWidget {
       body: Center(
         child: Padding(
           padding: EdgeInsets.only(left: 100.w, right: 100.w),
-          child: Obx(
-            () => SingleChildScrollView(
-              child: Column(
+          child: SingleChildScrollView(
+            child: Obx(
+              () => Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
@@ -103,9 +103,8 @@ class AddButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return FloatingActionButton(
       backgroundColor: AppColors.standardColor,
-      onPressed: () {},
-      tooltip: 'Add',
       child: const Icon(Icons.add),
+      onPressed: () {},
     );
   }
 }

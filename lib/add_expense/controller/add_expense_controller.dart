@@ -1,4 +1,8 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 class AddExpenseController extends GetxController with StateMixin {
@@ -14,15 +18,15 @@ class AddExpenseController extends GetxController with StateMixin {
   final String measureUnitLabelText = 'Unit*';
   final measureUnits = const <String>[
     'kg',
-    'l',
+    'liters',
     'pieces',
   ];
   var selectedMeasureUnit = ''.obs;
 
   final String expenseCategoryLabelText = 'Category*';
   final expenseCategories = const <String>[
-    'Debt',
     'Mission',
+    'Debt',
     'Savings/Investments',
     'Needs (Fixed)',
     'Needs (Variable)',
@@ -37,6 +41,7 @@ class AddExpenseController extends GetxController with StateMixin {
   void onInit() {
     selectedMeasureUnit.value = measureUnits[0];
     selectedExpenseCategory.value = expenseCategories[0];
+    readJson();
     super.onInit();
   }
 
@@ -50,5 +55,11 @@ class AddExpenseController extends GetxController with StateMixin {
     if (option != null) {
       selectedExpenseCategory.value = option;
     }
+  }
+
+  Future<void> readJson() async {
+    final data = await rootBundle.loadString('assets/secret/secret.json');
+    final jsonResponse = json.decode(data);
+    print('Secret passs ${jsonResponse}');
   }
 }
